@@ -1,0 +1,17 @@
+{
+  "name": "inheritance",
+  "version": "0.0.0",
+  "authors": [
+    "alejandrodob <alejandrodob@gmail.com>"
+  ],
+  "description": "practicing some JS concepts with uncle Martin",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {}
+}
