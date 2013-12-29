@@ -16,7 +16,7 @@ describe("The javascript languaje and its good and bad parts", function() {
       Creator.prototype = prototype;
       var obj = new Creator();
 
-      expect(Object.getPrototypeOf(obj)).toEqual(prototype);
+      expect(Object.getPrototypeOf(obj)).toBe(prototype);
     });
 
     it("inherit attributes from the prototype of the function that created them", function() {
@@ -32,27 +32,49 @@ describe("The javascript languaje and its good and bad parts", function() {
 
   describe("Functions", function() {
 
-    it("are linked to Function.prototype, which represents the prototype of the function as an object", function() {
-      var myFunc = function() {};
+    describe("The prototype of a function and its prototype attribute", function() {
 
-      expect(Object.getPrototypeOf(myFunc)).toBe(Function.prototype);
-      expect(Object.getPrototypeOf(myFunc)).not.toBe(Object.prototype);
-    });
+      it("are linked to Function.prototype, which represents the prototype of the function as an object", function() {
+        var myFunc = function() {};
 
-    it("have an attribute called prototype", function() {
-      var myFunc = function() {};
-      var prototypeAttr = myFunc.prototype;
-
-      expect(prototypeAttr).not.toBe(undefined);
-    });
-
-    it("the prototype of the function is not the same as the prototype attribute", function(){
-      var myFunc = function() {};
-      var prototypeAttr = myFunc.prototype;
-      var _proto_ = Object.getPrototypeOf(myFunc);
-
-      expect(_proto_=== prototypeAttr).toBeFalsy();
+        expect(Object.getPrototypeOf(myFunc)).toBe(Function.prototype);
+        expect(Object.getPrototypeOf(myFunc)).not.toBe(Object.prototype);
       });
+
+      it("have an attribute called prototype", function() {
+        var myFunc = function() {};
+        var prototypeAttr = myFunc.prototype;
+
+        expect(prototypeAttr).not.toBe(undefined);
+      });
+
+      it("the prototype of the function is not the same as the prototype attribute", function(){
+        var myFunc = function() {};
+        var prototypeAttr = myFunc.prototype;
+        var _proto_ = Object.getPrototypeOf(myFunc);
+
+        expect(_proto_=== prototypeAttr).toBeFalsy();
+        });
+
+      it("the prototype attribute is what objects created with 'new' will inherit", function() {
+        var Creator = function() {};
+        var obj = new Creator();
+        var objectInheritedPrototype = Object.getPrototypeOf(obj);
+        var prototypeAttr = Creator.prototype;
+
+        expect(objectInheritedPrototype).toBe(prototypeAttr);
+      });
+
+      it("the prototype of the function as an object is not what objects created with 'new' will inherit", function() {
+        var Creator = function() {};
+        var obj = new Creator();
+        var objectInheritedPrototype = Object.getPrototypeOf(obj);
+        var functionPrototype = Object.getPrototypeOf(Creator);
+
+        expect(Object.getPrototypeOf(obj)).not.toBe(functionPrototype);
+      });
+
+    });
 
   });
 
