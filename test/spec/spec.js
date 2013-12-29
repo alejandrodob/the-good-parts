@@ -6,7 +6,8 @@ describe("The javascript languaje and its good and bad parts", function() {
 
     it("are created with a link to Object.prototype, if created as literals", function() {
       var object = {};
-      expect(Object.getPrototypeOf(object)).toEqual(Object.prototype);
+
+      expect(Object.getPrototypeOf(object)).toBe(Object.prototype);
     });
 
     it("are created with a link to the prototype of the function that created them", function() {
@@ -31,7 +32,28 @@ describe("The javascript languaje and its good and bad parts", function() {
 
   describe("Functions", function() {
 
-    it();
+    it("are linked to Function.prototype, which represents the prototype of the function as an object", function() {
+      var myFunc = function() {};
+
+      expect(Object.getPrototypeOf(myFunc)).toBe(Function.prototype);
+      expect(Object.getPrototypeOf(myFunc)).not.toBe(Object.prototype);
+    });
+
+    it("have an attribute called prototype", function() {
+      var myFunc = function() {};
+      var prototypeAttr = myFunc.prototype;
+
+      expect(prototypeAttr).not.toBe(undefined);
+    });
+
+    it("the prototype of the function is not the same as the prototype attribute", function(){
+      var myFunc = function() {};
+      var prototypeAttr = myFunc.prototype;
+      var _proto_ = Object.getPrototypeOf(myFunc);
+
+      expect(_proto_=== prototypeAttr).toBeFalsy();
+      });
+
   });
 
 
