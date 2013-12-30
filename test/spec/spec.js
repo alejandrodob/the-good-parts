@@ -106,7 +106,23 @@ describe("The javascript languaje and its good and bad parts", function() {
 
   });
 
-  describe("Inheritance", function() {
+  describe("Inheritance types", function() {
+
+    describe("Pseudoclassical", function() {
+      it("can simulate classes to produce objects", function() {
+        var Mammal = function(name) {
+          this.name = name;
+        };
+        Mammal.prototype.get_name = function() {
+          return this.name;
+        };
+
+        var myMammal = new Mammal('Monkey the mammal');
+        var name = myMammal.get_name();
+
+        expect(name).toBe('Monkey the mammal');
+      });
+    });
 
   });
 
