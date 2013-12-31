@@ -109,18 +109,43 @@ describe("The javascript languaje and its good and bad parts", function() {
   describe("Inheritance types", function() {
 
     describe("Pseudoclassical", function() {
+      var Mammal = function(name) {
+        this.name = name;
+      };
+      Mammal.prototype.get_name = function() {
+        return this.name;
+      };
+      Mammal.prototype.saying = function() {
+        return this.saying || '';
+      };
+
       it("can simulate classes to produce objects", function() {
-        var Mammal = function(name) {
-          this.name = name;
-        };
-        Mammal.prototype.get_name = function() {
-          return this.name;
-        };
-
         var myMammal = new Mammal('Monkey the mammal');
-        var name = myMammal.get_name();
 
-        expect(name).toBe('Monkey the mammal');
+        // gets methods defined by the 'class'
+        expect(myMammal.get_name).toBeTruthy();
+        expect(myMammal.saying).toBeTruthy();
+      });
+
+      it("can define a class that inherits from another", function() {
+        // Define a new class
+        var Cat = function(name) {
+          this.name = name;
+          this.saying = 'meow';
+        };
+        // Define the inheritance relationship
+        Cat.prototype = new Mammal();
+        // Add new methods to Cat class
+        Cat.prototype.purr = function() {
+          return 'r-r-r';
+        };
+
+        var myCat = new Cat('Silvestre');
+
+        //gets methods defined by Mammal, as well as own Cat methods
+        expect(myCat.get_name()).toBe('Silvestre');
+        expect(myCat.saying).toBeTruthy();
+        expect(myCat.purr).toBeTruthy();
       });
     });
 
