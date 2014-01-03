@@ -175,6 +175,7 @@ describe("The javascript languaje and its good and bad parts", function() {
   });
 
   describe("Prototypal", function() {
+
     it("creates objects that inherit from other objects", function() {
       // Create an object
       var myMammal = {
@@ -199,7 +200,42 @@ describe("The javascript languaje and its good and bad parts", function() {
       expect(myCat.saying).toBeTruthy();
       expect(myCat.purr).toBeTruthy();
     });
-    
+
+  });
+
+  describe("Functional", function() {
+    var mammal = function(spec) {
+      var self = {};
+
+      self.get_name = function() {
+        return spec.name;
+      };
+      self.says = function() {
+        return spec.saying;
+      };
+
+      return self;
+    };
+
+    it("can create objects using functional 'constructors'", function() {
+      var myMammal = mammal({name: 'one mammal'});
+
+      expect(myMammal.get_name()).toBe('one mammal');
+    });
+
+    it("allows having 'private' variables", function() {
+      var withPrivates = function() {
+        var self = {};
+        var privateVariable = 'hello';
+        
+        return self;
+      };
+      var instance = withPrivates();
+
+      expect(instance.privateVariable).toBe(undefined);
+      expect(withPrivates.privateVariable).toBe(undefined);
+    });
+
   });
 
 
