@@ -147,6 +147,29 @@ describe("The javascript languaje and its good and bad parts", function() {
         expect(myCat.saying).toBeTruthy();
         expect(myCat.purr).toBeTruthy();
       });
+
+      it("can do all the previous with a little sintactic sugar", function() {
+        Function.prototype.inherits = function(Parent) {
+          this.prototype = new Parent();
+          return this;
+        };
+
+        var Cat = function(name) {
+          this.name = name;
+          this.saying = 'meow';
+        };
+        Cat.inherits(Mammal).
+          prototype.purr = function() {
+            return 'r-r-r';
+          };
+
+        var myCat = new Cat('Silvestre');
+
+        //gets methods defined by Mammal, as well as own Cat methods
+        expect(myCat.get_name()).toBe('Silvestre');
+        expect(myCat.saying).toBeTruthy();
+        expect(myCat.purr).toBeTruthy();
+      });
     });
 
   });
