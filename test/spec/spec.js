@@ -204,24 +204,6 @@ describe("The javascript languaje and its good and bad parts", function() {
   });
 
   describe("Functional", function() {
-    var mammal = function(spec) {
-      var self = {};
-
-      self.get_name = function() {
-        return spec.name;
-      };
-      self.says = function() {
-        return spec.saying;
-      };
-
-      return self;
-    };
-
-    it("can create objects using functional 'constructors'", function() {
-      var myMammal = mammal({name: 'one mammal'});
-
-      expect(myMammal.get_name()).toBe('one mammal');
-    });
 
     it("allows having 'private' variables", function() {
       var withPrivates = function() {
@@ -252,6 +234,38 @@ describe("The javascript languaje and its good and bad parts", function() {
       expect(exposed.privateVariable).toBe(undefined);
       expect(exposed.publicMethod()).toBe('hello');
     });
+
+    it("can create objects that inherit from other objects", function() {
+      var mammal = function(spec) {
+        var self = {};
+        self.get_name = function() {
+          return spec.name;
+        };
+        self.says = function() {
+          return spec.saying;
+        };
+        return self;
+      };
+      var cat = function(spec) {
+        spec.saying = spec.saying || 'meow';
+        var self = mammal(spec);
+        self.purr = function() {
+          return 'r-r-r';
+        };
+
+        return self;
+      };
+
+      var myMammal = mammal({name: 'one mammal'});
+      var myCat = cat({name: 'Silvestre'});
+
+      expect(myMammal.get_name()).toBe('one mammal');
+      expect(myCat.get_name()).toBe('Silvestre');
+      expect(myCat.says()).toBe('meow');
+      expect(myCat.purr()).toBe('r-r-r');
+    });
+
+    it();
 
   });
 
