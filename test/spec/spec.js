@@ -174,5 +174,41 @@ describe("The javascript languaje and its good and bad parts", function() {
 
   });
 
+  describe("Prototypal", function() {
+    it("creates objects that inherit from other objects", function() {
+      // Create an object
+      var myMammal = {
+        name : 'a mammal',
+        get_name : function() {
+          return this.name;
+        },
+        says : function() {
+          return this.saying || '';
+        }
+      };
+
+      //Create more instances of it and customize them
+      var myCat = Object.create(myMammal);
+      myCat.name = 'Silvestre';
+      myCat.saying = 'meow';
+      myCat.purr = function() {
+        return 'r-r-r';
+      };
+
+      expect(myCat.get_name()).toBe('Silvestre');
+      expect(myCat.saying).toBeTruthy();
+      expect(myCat.purr).toBeTruthy();
+    });
+    
+  });
+
 
 });
+
+
+
+
+
+
+
+
