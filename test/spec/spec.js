@@ -115,7 +115,7 @@ describe("The javascript languaje and its good and bad parts", function() {
       Mammal.prototype.get_name = function() {
         return this.name;
       };
-      Mammal.prototype.saying = function() {
+      Mammal.prototype.says = function() {
         return this.saying || '';
       };
 
@@ -124,7 +124,7 @@ describe("The javascript languaje and its good and bad parts", function() {
 
         // gets methods defined by the 'class'
         expect(myMammal.get_name).toBeTruthy();
-        expect(myMammal.saying).toBeTruthy();
+        expect(myMammal.says).toBeTruthy();
       });
 
       it("can define a class that inherits from another", function() {
@@ -144,8 +144,8 @@ describe("The javascript languaje and its good and bad parts", function() {
 
         //gets methods defined by Mammal, as well as own Cat methods
         expect(myCat.get_name()).toBe('Silvestre');
-        expect(myCat.saying).toBeTruthy();
-        expect(myCat.purr).toBeTruthy();
+        expect(myCat.says()).toBe('meow');
+        expect(myCat.purr()).toBe('r-r-r');
       });
 
       it("can do all the previous with a little sintactic sugar", function() {
@@ -167,8 +167,8 @@ describe("The javascript languaje and its good and bad parts", function() {
 
         //gets methods defined by Mammal, as well as own Cat methods
         expect(myCat.get_name()).toBe('Silvestre');
-        expect(myCat.saying).toBeTruthy();
-        expect(myCat.purr).toBeTruthy();
+        expect(myCat.says()).toBe('meow');
+        expect(myCat.purr()).toBe('r-r-r');
       });
     });
 
@@ -197,8 +197,8 @@ describe("The javascript languaje and its good and bad parts", function() {
       };
 
       expect(myCat.get_name()).toBe('Silvestre');
-      expect(myCat.saying).toBeTruthy();
-      expect(myCat.purr).toBeTruthy();
+      expect(myCat.says()).toBe('meow');
+      expect(myCat.purr()).toBe('r-r-r');
     });
 
   });
@@ -264,8 +264,6 @@ describe("The javascript languaje and its good and bad parts", function() {
       expect(myCat.says()).toBe('meow');
       expect(myCat.purr()).toBe('r-r-r');
     });
-
-    it();
 
   });
 
