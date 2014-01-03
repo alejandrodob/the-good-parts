@@ -236,6 +236,23 @@ describe("The javascript languaje and its good and bad parts", function() {
       expect(withPrivates.privateVariable).toBe(undefined);
     });
 
+    it("allows the public exposure of some variables or methods", function() {
+      var withExposed = function() {
+        var self = {};
+        var privateVariable = 'hello';
+        var publicMethod = function() {
+          return privateVariable;
+        };
+        self.publicMethod = publicMethod;
+        return self;
+      };
+
+      var exposed = withExposed();
+
+      expect(exposed.privateVariable).toBe(undefined);
+      expect(exposed.publicMethod()).toBe('hello');
+    });
+
   });
 
 
