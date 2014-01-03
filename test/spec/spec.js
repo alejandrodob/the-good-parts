@@ -267,6 +267,36 @@ describe("The javascript languaje and its good and bad parts", function() {
 
   });
 
+  describe("Arrays", function() {
+
+    describe("When removing elements", function() {
+      var myArray, initialLength;
+      beforeEach(function() {
+        myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        initialLength = myArray.length;
+      });
+
+      it("delete leaves 'holes' in the array", function() {
+        // delete removes an element, but puts 'undefined' instead
+        delete myArray[2];
+        expect(myArray[2]).toBe(undefined); 
+        // and thus the length remains the same
+        expect(myArray.length).toBe(initialLength);
+      });
+
+      it("if using splice, the element is completely removed", function() {
+        myArray.splice(2,1);
+        // as it does not leave holes, the elements on the right are moved to the left
+        expect(myArray[2]).toBe(3);
+        expect(myArray.length).toBe(initialLength - 1);
+      });
+
+    });
+
+
+
+  });
+
 
 });
 
