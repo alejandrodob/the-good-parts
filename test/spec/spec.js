@@ -28,6 +28,28 @@ describe("The javascript languaje and its good and bad parts", function() {
       expect(inheritedAttribute).toEqual('attribute');
     });
 
+    it("permits us to implement our own 'new' operator", function() {
+      function myNew(constructor) {
+        var object = Object.create(constructor.prototype);
+        var args = [].slice.call(arguments);
+        constructor.apply(object, args.slice(1));
+        return object;
+      }
+      function Car(brand, color) {
+        this.brand = brand;
+        this.color = color;
+      }
+      Car.prototype.drive = function() { return 'Runnnnnning'; };
+
+      var newCar = new Car('ford', 'blue');
+      var myNewCar = myNew(Car, 'ford', 'blue');
+
+      expect(newCar.color).toEqual(myNewCar.color);
+      expect(newCar.brand).toEqual(myNewCar.brand);
+      expect(newCar.drive()).toEqual(myNewCar.drive());
+      expect(Object.getPrototypeOf(newCar)).toBe(Object.getPrototypeOf(myNewCar));
+    });
+
     it("have a constructor property, pointing to the function that created them", function() {
       function Creator() {}
       var obj = new Creator();
